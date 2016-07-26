@@ -176,15 +176,15 @@ namespace ColorBlockScreensaver
 
             if(autoDark && (currentHour > 20 || currentHour < 8))
             {
-                colorArray[0] = (byte)randomGenerator.Next(0, 32);
-                colorArray[1] = (byte)randomGenerator.Next(0, 32);
-                colorArray[2] = (byte)randomGenerator.Next(0, 32);
+                colorArray[0] = (byte)randomGenerator.Next(0, 33);
+                colorArray[1] = (byte)randomGenerator.Next(0, 33);
+                colorArray[2] = (byte)randomGenerator.Next(0, 33);
             }
             else
             {
-                colorArray[0] = (byte)randomGenerator.Next(0, 255);
-                colorArray[1] = (byte)randomGenerator.Next(0, 255);
-                colorArray[2] = (byte)randomGenerator.Next(0, 255);
+                colorArray[0] = (byte)randomGenerator.Next(0, 256);
+                colorArray[1] = (byte)randomGenerator.Next(0, 256);
+                colorArray[2] = (byte)randomGenerator.Next(0, 256);
             }
             
         }
