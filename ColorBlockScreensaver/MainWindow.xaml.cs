@@ -46,6 +46,7 @@ namespace ColorBlockScreensaver
         bool changeColors;
         bool displayHexCodes;
         bool animationMode;
+        bool animationBounce;
 
         int blockPixelOffset;
         int runoffBlocks;
@@ -75,6 +76,7 @@ namespace ColorBlockScreensaver
                 changeColors = true;
                 displayHexCodes = false;
                 animationMode = false;
+                animationBounce = true;
                 sweepSpeed = 15;
                 blockPixelOffset = 100;
                 runoffBlocks = 8;
@@ -88,6 +90,7 @@ namespace ColorBlockScreensaver
                 changeColors = Convert.ToBoolean(newKey.GetValue("changeColors"));
                 displayHexCodes = Convert.ToBoolean(newKey.GetValue("hexCodes"));
                 animationMode = Convert.ToBoolean(newKey.GetValue("animMode"));
+                animationBounce = Convert.ToBoolean(newKey.GetValue("animBounce"));
 
                 try
                 {
@@ -173,9 +176,9 @@ namespace ColorBlockScreensaver
 
             if(autoDark && (currentHour > 20 || currentHour < 8))
             {
-                colorArray[0] = (byte)randomGenerator.Next(0, 96);
-                colorArray[1] = (byte)randomGenerator.Next(0, 96);
-                colorArray[2] = (byte)randomGenerator.Next(0, 96);
+                colorArray[0] = (byte)randomGenerator.Next(0, 32);
+                colorArray[1] = (byte)randomGenerator.Next(0, 32);
+                colorArray[2] = (byte)randomGenerator.Next(0, 32);
             }
             else
             {
@@ -252,14 +255,29 @@ namespace ColorBlockScreensaver
                 doubleAnimation.From = 0;
                 doubleAnimation.To = 1;
                 doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(blockTimeOffset));
-                doubleAnimation.AutoReverse = true;
+                if(animationBounce)
+                {
+                    doubleAnimation.AutoReverse = true;
+                }
+                else
+                {
+                    doubleAnimation.AutoReverse = false;
+                }
+                
             }
             else
             {
                 doubleAnimation.From = (-screenWidth) - blockOffset;
                 doubleAnimation.To = (screenWidth);
                 doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(blockTimeOffset));
-                doubleAnimation.AutoReverse = true;
+                if (animationBounce)
+                {
+                    doubleAnimation.AutoReverse = true;
+                }
+                else
+                {
+                    doubleAnimation.AutoReverse = false;
+                }
             }
             
         }
@@ -286,8 +304,11 @@ namespace ColorBlockScreensaver
             int blockOffset = blockWidth; //These two variables offset the blocks during creation
             double blockTimeDelayOffset = sweepSpeed; //to prevent overlap during animation 15.0f is default
 
+            System.Console.WriteLine("Max Generated Rectangles: " + maximumGeneratedRectangles);
+
             for (int i = 0; i < maximumGeneratedRectangles; i++)
             {
+                System.Console.WriteLine("Time Delay in creation: " + blockTimeDelayOffset);
                 generateRandomColors(randomColorArray);
 
                 Color randomGeneratedColor = Color.FromRgb(randomColorArray[0], randomColorArray[1], randomColorArray[2]);
@@ -328,8 +349,13 @@ namespace ColorBlockScreensaver
                             }
                         }
 
+                        setupAnimation(screenSweepAnimation, screenWidth, blockOffset, blockTimeDelayOffset);
+
                         newRectangle.BeginAnimation(OpacityProperty, screenSweepAnimation);
+
+                        System.Console.WriteLine("Time Delay In Completed: " + blockTimeDelayOffset);
                     };
+                    setupAnimation(screenSweepAnimation, screenWidth, blockOffset, blockTimeDelayOffset);
                     newRectangle.BeginAnimation(OpacityProperty, screenSweepAnimation);
                 }
                 else
@@ -352,8 +378,11 @@ namespace ColorBlockScreensaver
                             }
                         }
 
+                        setupAnimation(screenSweepAnimation, screenWidth, blockOffset, blockTimeDelayOffset);
+
                         newRectangle.BeginAnimation(Canvas.LeftProperty, screenSweepAnimation);
                     };
+                    setupAnimation(screenSweepAnimation, screenWidth, blockOffset, blockTimeDelayOffset);
                     newRectangle.BeginAnimation(Canvas.LeftProperty, screenSweepAnimation);
                 }
                 
@@ -381,6 +410,9 @@ namespace ColorBlockScreensaver
 
                 rectangleGeneratePositionX += blockWidth + blockPixelOffset;
                 blockOffset += blockWidth;
+
+                
+
                 blockTimeDelayOffset += blockTimeOffset;
             }
 
@@ -397,6 +429,7 @@ namespace ColorBlockScreensaver
 		{
 			Application.Current.Shutdown();
 		}
+
 
         /// <summary>
         /// When a key is pressed, exit the screensaver
@@ -422,7 +455,7 @@ namespace ColorBlockScreensaver
 
             if (Math.Abs(e.GetPosition(null).X - OriginalLocation.X) > 20 | Math.Abs(e.GetPosition(null).Y - OriginalLocation.Y) > 20)
             {
-                Application.Current.Shutdown();
+               Application.Current.Shutdown();
             }
 
         }

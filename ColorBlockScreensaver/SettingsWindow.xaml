@@ -20,7 +20,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ColorBlockScreensaver"
         mc:Ignorable="d"
-        Title="Screensaver Settings" Height="400" Width="825">
+        Title="Screensaver Settings" Height="500" Width="825">
     <Grid Margin="6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -28,6 +28,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -66,45 +67,51 @@
         </StackPanel>
         <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="3">Should blocks sweep across the screen or fade in/out? (Default: Sweep)</TextBlock>
 
-        <Label Grid.Row="4" Margin="0 0 6 0">Initial Animation Speed (Advanced)</Label>
+        <Label Grid.Row="4" Margin="0 0 12 0">Animation Reverse</Label>
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4" >
+            <CheckBox IsChecked="True" Checked="checkBox_Checked" Unchecked="checkBox_Unchecked" x:Name="checkBox_animBounce" VerticalAlignment="Center" Content="Enabled"/>
+        </StackPanel>
+        <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="4">Should the animation reverse once it reaches the end? (Default: Enabled)</TextBlock>
+
+        <Label Grid.Row="5" Margin="0 0 6 0">Initial Animation Speed (Advanced)</Label>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="5" >
             <TextBox x:Name="textBox_sweepSpeed" Width="110" />
         </StackPanel>
-        <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="4">How fast should the first block take to complete its animation (in seconds)? (Default: 15)</TextBlock>
+        <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="5">How fast should the first block take to complete its animation (in seconds)? (Default: 15)</TextBlock>
 
-        <Label Grid.Row="5" Margin="0 0 6 0">Block Pixel Offset (Advanced)</Label>
-        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="5" >
+        <Label Grid.Row="6" Margin="0 0 6 0">Block Pixel Offset (Advanced)</Label>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="6" >
             <TextBox x:Name="textBox_blockPixelOffset" Width="110" />
         </StackPanel>
-        <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="5">How many pixels offset should each block be from one another? (Default: 100)</TextBlock>
+        <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="6">How many pixels offset should each block be from one another? (Default: 100)</TextBlock>
 
-        <Label Grid.Row="6" Margin="0 0 6 0"># Runoff Blocks (Advanced)</Label>
-        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="6" >
+        <Label Grid.Row="7" Margin="0 0 6 0"># Runoff Blocks (Advanced)</Label>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="7" >
             <TextBox Margin="0 0 6 0" x:Name="textBox_runoffBlocks" Width="110" />
         </StackPanel>
-        <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="6">Number of "runoff" blocks added to the animation (Default: 8)</TextBlock>
+        <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="7">Number of "runoff" blocks added to the animation (Default: 8)</TextBlock>
 
-        <Label Grid.Row="7" Margin="0 0 6 0">Block Pixel Thickness (Advanced)</Label>
-        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="7" >
+        <Label Grid.Row="8" Margin="0 0 6 0">Block Pixel Thickness (Advanced)</Label>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="8" >
             <TextBox Margin="0 0 6 0" x:Name="textBox_blockWidth" Width="110" />
         </StackPanel>
-        <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="7">Thickness of each block in the animation in pixels (Default: 125)</TextBlock>
+        <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="8">Thickness of each block in the animation in pixels (Default: 125)</TextBlock>
 
-        <Label Grid.Row="8" Margin="0 0 6 0">Font Size (Advanced)</Label>
-        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="8" >
+        <Label Grid.Row="9" Margin="0 0 6 0">Font Size (Advanced)</Label>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="9" >
             <TextBox Margin="0 0 6 0" x:Name="textBox_fontSize" Width="110" />
         </StackPanel>
-        <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="8">Font size of the HTML hex code in each block (Default: 36)</TextBlock>
+        <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="9">Font size of the HTML hex code in each block (Default: 36)</TextBlock>
 
-        <Label Grid.Row="9" Margin="0 0 6 0">Block Time Offset (Advanced)</Label>
-        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="9" >
+        <Label Grid.Row="10" Margin="0 0 6 0">Block Time Offset (Advanced)</Label>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="10" >
             <TextBox Margin="0 0 6 0" x:Name="textBox_blockTimeOffset" Width="110" />
         </StackPanel>
-        <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="9">How many seconds offset should each blocks' animation complete time be? (Default: 0.75)</TextBlock>
+        <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="10">How many seconds offset should each blocks' animation complete time be? (Default: 0.75)</TextBlock>
 
-        <Label Grid.Row="10" Grid.ColumnSpan="3" Margin="0 0 0 0" HorizontalAlignment="Center">Designed by James Keith (www.mainrevolution.com)</Label>
-        <Label Grid.Row="11" Grid.ColumnSpan="3" Margin="0 0 0 0" HorizontalAlignment="Center">Screensaver C# Template by Wm. Barrett Simms (www.wbsimms.com)</Label>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="12" Grid.ColumnSpan="3">
+        <Label Grid.Row="11" Grid.ColumnSpan="3" Margin="0 0 0 0" HorizontalAlignment="Center">Designed by James Keith (www.mainrevolution.com)</Label>
+        <Label Grid.Row="12" Grid.ColumnSpan="3" Margin="0 0 0 0" HorizontalAlignment="Center">Screensaver C# Template by Wm. Barrett Simms (www.wbsimms.com)</Label>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="13" Grid.ColumnSpan="3">
             <Button Click="button_quit_Click" Margin="0 12 0 0" HorizontalAlignment="Center" x:Name="button_quit" Content="Exit" Width="75"/>
             <Button Click="button_Click" Margin="12 12 0 0" HorizontalAlignment="Center" x:Name="button" Content="Save &amp; Exit" Width="75"/>
         </StackPanel>

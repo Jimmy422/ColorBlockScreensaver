@@ -46,17 +46,20 @@ namespace ColorBlockScreensaver
 
         private void saveSettings()
         {
+            //checkBox_animBounce
             RegistryKey newKey = Registry.CurrentUser.CreateSubKey("SOFTWARE\\ColorBlockScreensaver");
             newKey.SetValue("autoDark", checkBox_autodark.IsChecked);
             newKey.SetValue("changeColors", checkBox_changeColors.IsChecked);
             newKey.SetValue("hexCodes", checkBox_hexCodes.IsChecked);
             newKey.SetValue("animMode", checkBox_animMode.IsChecked);
+            newKey.SetValue("animBounce", checkBox_animBounce.IsChecked);
             newKey.SetValue("sweepSpeed", textBox_sweepSpeed.Text);
             newKey.SetValue("blockPixelOffset", textBox_blockPixelOffset.Text);
             newKey.SetValue("runoffBlocks", textBox_runoffBlocks.Text);
             newKey.SetValue("blockWidth", textBox_blockWidth.Text);
             newKey.SetValue("fontSize", textBox_fontSize.Text);
             newKey.SetValue("blockTimeOffset", textBox_blockTimeOffset.Text);
+            
         }
 
         private void loadSettings()
@@ -68,6 +71,7 @@ namespace ColorBlockScreensaver
                 checkBox_changeColors.IsChecked = true;
                 checkBox_hexCodes.IsChecked = false;
                 checkBox_animMode.IsChecked = false;
+                checkBox_animBounce.IsChecked = true;
                 textBox_sweepSpeed.Text = "15";
                 textBox_blockPixelOffset.Text = "100";
                 textBox_runoffBlocks.Text = "8";
@@ -81,6 +85,7 @@ namespace ColorBlockScreensaver
                 checkBox_changeColors.IsChecked = Convert.ToBoolean(newKey.GetValue("changeColors"));
                 checkBox_hexCodes.IsChecked = Convert.ToBoolean(newKey.GetValue("hexCodes"));
                 checkBox_animMode.IsChecked = Convert.ToBoolean(newKey.GetValue("animMode"));
+                checkBox_animBounce.IsChecked = Convert.ToBoolean(newKey.GetValue("animBounce"));
                 textBox_sweepSpeed.Text = (string)newKey.GetValue("sweepSpeed");
                 textBox_blockPixelOffset.Text = (string)newKey.GetValue("blockPixelOffset");
                 textBox_runoffBlocks.Text = (string)newKey.GetValue("runoffBlocks");
